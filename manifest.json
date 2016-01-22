@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "HoogleSwitcher",
+  "description": "This extension help you search hackage and stackage",
+  "version": "1.0",
+  "icons": {
+    "16": "images/icons/icon-16.png",
+    "48": "images/icons/icon-48.png",
+    "128": "images/icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icons/icon-19.png",
+      "38": "images/icons/icon-38.png"
+    },
+    "default_title": "Hoogle+",
+    "default_popup": "popup.html"
+  }
+}
