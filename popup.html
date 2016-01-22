@@ -7,16 +7,14 @@
     <script src="js/main.js"></script>
   </head>
   <body>
-    <form id="form">
-      <p>
-        <input type="radio" id="hackage" name="engine" value="hackage" checked="checked">
-        <label for="hackage">Hackage</label>
-        <input type="radio" id="lts" name="engine" value="lts">
-        <label for="lts">LTS</label>
-        <input type="radio" id="nightly" name="engine" value="nightly">
-        <label for="nightly">nightly</label>
+    <h2>Hoogle Switcher</h2>
+    <form id="search-form">
+      <p id="subjects">
       </p>
       <input type="text" id="query" name="query"><button id="search">Search</button>
+    </form>
+    <form id="add-snapshot-form">
+      <input type="text" name="snapshot"><button id="add-snapshot">Add Snapshot</button>
     </form>
   </body>
 </html>
