@@ -35,6 +35,20 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
+  // delete a snapshot
+  var deleteSnapshotButton = document.getElementById('delete-snapshot');
+  deleteSnapshotButton.addEventListener('click', function(){
+    var candidate = document.getElementById('delete-snapshot-form')['delete-candidate'].value;
+    chrome.storage.local.get('subjects', function (storage){
+      var subjects = storage.subjects;
+      var index = subjects.indexOf(candidate);
+      if(index > -1){
+        subjects.splice(index, 1);
+      }
+      chrome.storage.local.set({'subjects': subjects});
+    });
+  });
+
   // display search subject
   var subjects = document.getElementById('subjects');
   chrome.storage.local.get('subjects', function (storage){
@@ -57,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var label = document.createElement('label');
         label.htmlFor = subjectName;
         label.innerHTML = subjectName;
+        label.classList.add('subject-label');
         span.appendChild(label);
 
         subjects.appendChild(span);
@@ -64,6 +79,19 @@ document.addEventListener('DOMContentLoaded', function(){
         // focus on a checked radio button
         document.querySelector('input[name="subject"]:checked').focus();
       })
+    }
+  });
+
+  // display candidates to delete
+  var select = document.getElementById('delete-candidate');
+  chrome.storage.local.get('subjects', function (storage){
+    if(storage.subjects){
+      storage.subjects.forEach(function(subjectName){
+        var option = document.createElement('option');
+        option.value = subjectName;
+        option.innerHTML = subjectName;
+        select.appendChild(option);
+      });
     }
   });
 });
