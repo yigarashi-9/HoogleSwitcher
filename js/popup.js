@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function(){
   chrome.storage.local.get('subjects', function (storage){
     if(storage.subjects){
       storage.subjects.forEach(function(subjectName){
-        console.log(subjectName);
         var span = document.createElement('span');
 
         var radio = document.createElement('input');
