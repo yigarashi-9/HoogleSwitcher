@@ -7,16 +7,17 @@
     <script src="js/popup.js"></script>
   </head>
   <body>
-    <h2>Hoogle Switcher</h2>
     <form id="search-form">
       <p id="snapshots">
       </p>
       <input type="text" id="query" name="query" placeholder="e.g. map" class="input-primary"><button id="search" class="btn-primary">Search</button>
     </form>
     <h3>Stackage Snapshot</h3>
+    <a id="add-snapshot-link" href="#">Add snapshot frequently used</a>
     <form id="add-snapshot-form">
       <input type="text" name="snapshot" placeholder="e.g. lts-4.2"><button id="add-snapshot" class="btn">Add</button>
     </form>
+    <a id="delete-snapshot-link" href="#">Delete snapshot</a>
     <form id="delete-snapshot-form">
       <select id="delete-candidate" name="delete-candidate">
       </select>
