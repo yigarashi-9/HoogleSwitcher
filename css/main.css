@@ -7,7 +7,6 @@ button {
     width: 100px;
     padding: 4px 10px;
     text-align: center;
-    border-radius: 3px;
     cursor: pointer;
 }
 
@@ -32,7 +31,6 @@ input[type="text"] {
     margin: 0 5px 8px 0;
     font-size: 15px;
     border: solid 1px #C0C0C0;
-    border-radius: 3px;
 }
 
 input[type="text"]:focus {
@@ -49,7 +47,6 @@ select {
     padding: 4px;
     margin: -4px 2px 0 0;
     border: solid 1px #C0C0C0;
-    border-radius: 3px;
     font-size: 14px;
     background: none transparent;
     vertical-align: middle;
