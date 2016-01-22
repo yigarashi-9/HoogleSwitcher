@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   var searchButton = document.getElementById('search');
+  document.querySelector('input[name="engine"]:checked').focus();
 
   searchButton.addEventListener('click', (function() {
     var query = document.getElementById('form').query.value;
