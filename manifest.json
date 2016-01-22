@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "HoogleSwitcher",
-  "description": "This extension help you search hackage and stackage",
+  "description": "Help haskellers search hackage and stackage",
   "version": "1.0",
   "icons": {
     "16": "images/icons/icon-16.png",
