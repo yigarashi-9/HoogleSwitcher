@@ -19,7 +19,7 @@
       "19": "images/icons/icon-19.png",
       "38": "images/icons/icon-38.png"
     },
-    "default_title": "Hoogle+",
+    "default_title": "HoogleSwitcher",
     "default_popup": "popup.html"
   }
 }
