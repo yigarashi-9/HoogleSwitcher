@@ -1,37 +1,37 @@
 document.addEventListener('DOMContentLoaded', function(){
   // initilize local storage
-  chrome.storage.local.get('subjects', function(storage){
-    if(!storage.subjects){
-      chrome.storage.local.set({'subjects': ['hackage', 'lts', 'nightly']});
+  chrome.storage.local.get('snapshots', function(storage){
+    if(!storage.snapshots){
+      chrome.storage.local.set({'snapshots': ['hackage', 'lts', 'nightly']});
     };
   })
 
-  // open a new tab for the result of a query on the subject
+  // open a new tab for the result of a query on the snapshot
   var searchButton = document.getElementById('search');
   searchButton.addEventListener('click', function(){
     var query = document.getElementById('search-form').query.value;
-    var subject = document.querySelector('input[name="subject"]:checked').value;
+    var snapshot = document.querySelector('input[name="snapshot"]:checked').value;
 
     var url;
 
-    if(subject == 'hackage'){
+    if(snapshot == 'hackage'){
       url = 'https://www.haskell.org/hoogle/?hoogle=';
     }else{
-      url = 'https://www.stackage.org/' + subject + '/hoogle?q=';
+      url = 'https://www.stackage.org/' + snapshot + '/hoogle?q=';
     }
 
     url += query;
     chrome.tabs.create({'url': url});
   });
 
-  // add a new snapshot to search subjects
+  // add a new snapshot
   var addSnapshotButton = document.getElementById('add-snapshot');
   addSnapshotButton.addEventListener('click', function(){
     var snapshot = document.getElementById('add-snapshot-form').snapshot.value;
-    chrome.storage.local.get('subjects', function(storage){
-      var subjects = storage.subjects;
-      subjects.push(snapshot);
-      chrome.storage.local.set({'subjects': subjects});
+    chrome.storage.local.get('snapshots', function(storage){
+      var snapshots = storage.snapshots;
+      snapshots.push(snapshot);
+      chrome.storage.local.set({'snapshots': snapshots});
     });
   });
 
@@ -39,56 +39,56 @@ document.addEventListener('DOMContentLoaded', function(){
   var deleteSnapshotButton = document.getElementById('delete-snapshot');
   deleteSnapshotButton.addEventListener('click', function(){
     var candidate = document.getElementById('delete-snapshot-form')['delete-candidate'].value;
-    chrome.storage.local.get('subjects', function (storage){
-      var subjects = storage.subjects;
-      var index = subjects.indexOf(candidate);
+    chrome.storage.local.get('snapshots', function (storage){
+      var snapshots = storage.snapshots;
+      var index = snapshots.indexOf(candidate);
       if(index > -1){
-        subjects.splice(index, 1);
+        snapshots.splice(index, 1);
       }
-      chrome.storage.local.set({'subjects': subjects});
+      chrome.storage.local.set({'snapshots': snapshots});
     });
   });
 
-  // display search subject
-  var subjects = document.getElementById('subjects');
-  chrome.storage.local.get('subjects', function (storage){
-    if(storage.subjects){
-      storage.subjects.forEach(function(subjectName){
+  // display snapshots
+  var snapshots = document.getElementById('snapshots');
+  chrome.storage.local.get('snapshots', function (storage){
+    if(storage.snapshots){
+      storage.snapshots.forEach(function(snapshotName){
         var span = document.createElement('span');
 
         var radio = document.createElement('input');
         radio.type = 'radio';
-        radio.name = 'subject';
-        radio.id = subjectName;
-        radio.value = subjectName;
+        radio.name = 'snapshot';
+        radio.id = snapshotName;
+        radio.value = snapshotName;
 
-        if(subjectName == 'hackage'){
+        if(snapshotName == 'hackage'){
           radio.checked = true;
         }
         span.appendChild(radio);
 
         var label = document.createElement('label');
-        label.htmlFor = subjectName;
-        label.innerHTML = subjectName;
-        label.classList.add('subject-label');
+        label.htmlFor = snapshotName;
+        label.innerHTML = snapshotName;
+        label.classList.add('snapshot-label');
         span.appendChild(label);
 
-        subjects.appendChild(span);
+        snapshots.appendChild(span);
 
         // focus on a checked radio button
-        document.querySelector('input[name="subject"]:checked').focus();
+        document.querySelector('input[name="snapshot"]:checked').focus();
       })
     }
   });
 
-  // display candidates to delete
+  // display candidates of snapshot to delete
   var select = document.getElementById('delete-candidate');
-  chrome.storage.local.get('subjects', function (storage){
-    if(storage.subjects){
-      storage.subjects.forEach(function(subjectName){
+  chrome.storage.local.get('snapshots', function (storage){
+    if(storage.snapshots){
+      storage.snapshots.forEach(function(snapshotName){
         var option = document.createElement('option');
-        option.value = subjectName;
-        option.innerHTML = subjectName;
+        option.value = snapshotName;
+        option.innerHTML = snapshotName;
         select.appendChild(option);
       });
     }
