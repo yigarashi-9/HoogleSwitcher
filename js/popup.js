@@ -93,4 +93,16 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     }
   });
+
+  // display the form to add a snapshot
+  document.getElementById('add-snapshot-link').addEventListener('click', function(){
+    document.getElementById('add-snapshot-form').style.display = 'block';
+    document.getElementById('delete-snapshot-form').style.display = 'none';
+  });
+
+  // display the form to delete a snapshot
+  document.getElementById('delete-snapshot-link').addEventListener('click', function(){
+    document.getElementById('delete-snapshot-form').style.display = 'block';
+    document.getElementById('add-snapshot-form').style.display = 'none';
+  });
 });

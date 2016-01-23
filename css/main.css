@@ -56,3 +56,7 @@ select {
 .snapshot-label {
     font-size: 11pt;
 }
+
+.config {
+    display: none;
+}
