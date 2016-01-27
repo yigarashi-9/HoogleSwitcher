@@ -27,7 +27,7 @@
 }
 
 .btn-primary {
-    height: 32px;
+    height: 34px;
     font-size: 18px;
     color: #fff;
     background-color: #4285f4;
@@ -50,10 +50,6 @@
     font-size: 15px;
     border: solid 1px #C0C0C0;
     border-right: none;
-}
-
-.popup input[type="text"]:focus {
-    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 
 span.snapshot {
@@ -95,10 +91,6 @@ span.snapshot {
     margin: 0 5px 8px 0;
     font-size: 15px;
     border: solid 1px #C0C0C0;
-}
-
-.options input[type="text"]:focus {
-    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 
 .options select {
