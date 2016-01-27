@@ -56,6 +56,23 @@
     box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 
+span.snapshot {
+    line-height: 18px;
+    margin-right: 12px;
+}
+
+.snapshot input[type="radio"] {
+    height: 18px;
+    margin: 0 4px 0 0;
+    vertical-align: middle;
+}
+
+.snapshot label {
+    height: 18px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
 
 
 /* styles used in options.html */

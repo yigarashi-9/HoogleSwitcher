@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(storage.snapshots){
       storage.snapshots.forEach(function(snapshotName){
         var span = document.createElement('span');
+        span.classList.add('snapshot');
 
         var radio = document.createElement('input');
         radio.type = 'radio';
@@ -45,13 +46,12 @@ document.addEventListener('DOMContentLoaded', function(){
         var label = document.createElement('label');
         label.htmlFor = snapshotName;
         label.innerHTML = snapshotName;
-        label.classList.add('snapshot-label');
         span.appendChild(label);
 
         snapshots.appendChild(span);
 
         // focus on a checked radio button
-        document.querySelector('input[name="snapshot"]:checked').focus();
+        document.querySelector('input[type="radio"]:checked').focus();
       })
     }
   });
