@@ -1,15 +1,15 @@
-document.addEventListener('DOMContentLoaded', function(){
-  // initilize local storage
-  chrome.storage.local.get('snapshots', function(storage){
-    if(!storage.snapshots){
-      chrome.storage.local.set({'snapshots': {
-        'hackage': {'name': 'Hackage', 'prim': true},
-        'lts': {'name': 'LTS (latest)', 'prim': true},
-        'nightly': {'name': 'Nightly (latest)', 'prim': true}
-      }});
-    };
-  });
+// initilize local storage
+chrome.storage.local.get('snapshots', function(storage){
+  if(!storage.snapshots){
+    chrome.storage.local.set({'snapshots': {
+      'hackage': {'name': 'Hackage', 'prim': true},
+      'lts': {'name': 'LTS (latest)', 'prim': true},
+      'nightly': {'name': 'Nightly (latest)', 'prim': true}
+    }});
+  };
+});
 
+document.addEventListener('DOMContentLoaded', function(){
   // open a new tab for the result of a query on the snapshot
   var searchButton = document.getElementById('search');
   searchButton.addEventListener('click', function(){
