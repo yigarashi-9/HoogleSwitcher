@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
   // add a new snapshot
-  var addSnapshotButton = document.getElementById('add-snapshot');
+  var addSnapshotButton = document.getElementById('addSnapshot');
   addSnapshotButton.addEventListener('click', function(){
-    var snapshot = document.getElementById('add-snapshot-form').snapshot.value;
+    var snapshot = document.getElementById('addSnapshotForm').snapshot.value;
     chrome.storage.local.get('snapshots', function(storage){
       var snapshots = storage.snapshots;
       snapshots.push(snapshot);
@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   // delete a snapshot
-  var deleteSnapshotButton = document.getElementById('delete-snapshot');
+  var deleteSnapshotButton = document.getElementById('deleteSnapshot');
   deleteSnapshotButton.addEventListener('click', function(){
-    var candidate = document.getElementById('delete-snapshot-form')['delete-candidate'].value;
+    var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
     chrome.storage.local.get('snapshots', function (storage){
       var snapshots = storage.snapshots;
       var index = snapshots.indexOf(candidate);
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   // display candidates of snapshot to delete
-  var select = document.getElementById('delete-candidate');
+  var select = document.getElementById('deleteCandidate');
   chrome.storage.local.get('snapshots', function (storage){
     if(storage.snapshots){
       storage.snapshots.forEach(function(snapshotName){

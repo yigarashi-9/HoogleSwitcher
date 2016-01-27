@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // open a new tab for the result of a query on the snapshot
   var searchButton = document.getElementById('search');
   searchButton.addEventListener('click', function(){
-    var query = document.getElementById('search-form').query.value;
+    var query = document.getElementById('searchForm').query.value;
     var snapshot = document.querySelector('input[name="snapshot"]:checked').value;
 
     var url;
