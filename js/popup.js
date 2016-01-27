@@ -2,9 +2,13 @@ document.addEventListener('DOMContentLoaded', function(){
   // initilize local storage
   chrome.storage.local.get('snapshots', function(storage){
     if(!storage.snapshots){
-      chrome.storage.local.set({'snapshots': ['hackage', 'lts', 'nightly']});
+      chrome.storage.local.set({'snapshots': {
+        'hackage': {'name': 'Hackage', 'prim': true},
+        'lts': {'name': 'LTS (latest)', 'prim': true},
+        'nightly': {'name': 'Nightly (latest)', 'prim': true}
+      }});
     };
-  })
+  });
 
   // open a new tab for the result of a query on the snapshot
   var searchButton = document.getElementById('search');
@@ -28,31 +32,32 @@ document.addEventListener('DOMContentLoaded', function(){
   var snapshots = document.getElementById('snapshots');
   chrome.storage.local.get('snapshots', function (storage){
     if(storage.snapshots){
-      storage.snapshots.forEach(function(snapshotName){
+      var snapshotDict = storage.snapshots;
+      for(var snapId in snapshotDict){
         var span = document.createElement('span');
         span.classList.add('snapshot');
 
         var radio = document.createElement('input');
         radio.type = 'radio';
         radio.name = 'snapshot';
-        radio.id = snapshotName;
-        radio.value = snapshotName;
+        radio.id = snapId;
+        radio.value = snapId;
 
-        if(snapshotName == 'hackage'){
+        if(snapId == 'hackage'){
           radio.checked = true;
         }
         span.appendChild(radio);
 
         var label = document.createElement('label');
-        label.htmlFor = snapshotName;
-        label.innerHTML = snapshotName;
+        label.htmlFor = snapId;
+        label.innerHTML = snapshotDict[snapId].name;
         span.appendChild(label);
 
         snapshots.appendChild(span);
 
         // focus on a checked radio button
         document.querySelector('input[type="radio"]:checked').focus();
-      })
-    }
+      };
+    };
   });
 });

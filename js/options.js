@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var snapshot = document.getElementById('addSnapshotForm').snapshot.value;
     chrome.storage.local.get('snapshots', function(storage){
       var snapshots = storage.snapshots;
-      snapshots.push(snapshot);
+      snapshots[snapshot] = {'name': snapshot, 'prim': false};
       chrome.storage.local.set({'snapshots': snapshots});
     });
   });
@@ -16,9 +16,8 @@ document.addEventListener('DOMContentLoaded', function(){
     var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
     chrome.storage.local.get('snapshots', function (storage){
       var snapshots = storage.snapshots;
-      var index = snapshots.indexOf(candidate);
-      if(index > -1){
-        snapshots.splice(index, 1);
+      if(candidate in snapshots){
+        delete snapshots[candidate];
       }
       chrome.storage.local.set({'snapshots': snapshots});
     });
@@ -28,12 +27,15 @@ document.addEventListener('DOMContentLoaded', function(){
   var select = document.getElementById('deleteCandidate');
   chrome.storage.local.get('snapshots', function (storage){
     if(storage.snapshots){
-      storage.snapshots.forEach(function(snapshotName){
-        var option = document.createElement('option');
-        option.value = snapshotName;
-        option.innerHTML = snapshotName;
-        select.appendChild(option);
-      });
+      var snapshots = storage.snapshots;
+      for(var snapId in snapshots){
+        if(!snapshots[snapId].prim){
+          var option = document.createElement('option');
+          option.value = snapId;
+          option.innerHTML = snapshots[snapId].name;
+          select.appendChild(option);
+        }
+      };
     }
   });
 });
