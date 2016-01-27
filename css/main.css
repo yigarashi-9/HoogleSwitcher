@@ -1,0 +1,97 @@
+/* common styles */
+.section {
+    margin-top: 40px;
+}
+
+.help-text {
+    color: #B0B0B0;
+}
+
+.snapshot-label {
+    font-size: 11pt;
+}
+
+.btn {
+    appearence: none;
+    width: 100px;
+    padding: 4px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-default {
+    font-size: 15px;
+    color: #000;
+    background-color: #fff;
+    border: solid 1px #000;
+}
+
+.btn-primary {
+    height: 32px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #4285f4;
+    border: solid 1px #4285f4;
+}
+
+
+
+/* styles used in popup.html */
+.popup {
+    width: 400px;
+}
+
+.popup input[type="text"] {
+    width: 285px;
+    height: 22px;
+    appearence: none;
+    padding: 4px;
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    border: solid 1px #C0C0C0;
+    border-right: none;
+}
+
+.popup input[type="text"]:focus {
+    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+
+
+
+/* styles used in options.html */
+.options {
+    width: 900px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.options h1 {
+    border-bottom: solid 1px #C0C0C0;
+}
+
+
+.options input[type="text"] {
+    width: 285px;
+    appearence: none;
+    padding: 4px;
+    margin: 0 5px 8px 0;
+    font-size: 15px;
+    border: solid 1px #C0C0C0;
+}
+
+.options input[type="text"]:focus {
+    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+
+.options select {
+    width: 295px;
+    appearance: none;
+    padding: 4px;
+    margin: -4px 5px 0 0;
+    border: solid 1px #C0C0C0;
+    font-size: 14px;
+    background: none transparent;
+    vertical-align: middle;
+    cursor: pointer;
+}

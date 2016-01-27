@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>HoogleSwitcher | Options</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/options.js"></script>
+  </head>
+  <body>
+    <div class="options">
+      <h1>Hoogle Switcher</h1>
+      <div class="section">
+        <h2>Add snapshot</h2>
+        <form id="add-snapshot-form">
+          <p class="help-text">Enter the name of stackage snapshot in lower case.</p>
+          <input type="text" name="snapshot" placeholder="e.g. lts-4.2">
+          <button id="add-snapshot" class="btn btn-default">Add</button>
+        </form>
+      </div>
+      <div class="section">
+        <h2>Delete snapshot</h2>
+        <form id="delete-snapshot-form">
+          <select id="delete-candidate" name="delete-candidate">
+          </select>
+          <button id="delete-snapshot" class="btn btn-default">Delete</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

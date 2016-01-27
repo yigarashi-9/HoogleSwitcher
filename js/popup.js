@@ -24,31 +24,6 @@ document.addEventListener('DOMContentLoaded', function(){
     chrome.tabs.create({'url': url});
   });
 
-  // add a new snapshot
-  var addSnapshotButton = document.getElementById('add-snapshot');
-  addSnapshotButton.addEventListener('click', function(){
-    var snapshot = document.getElementById('add-snapshot-form').snapshot.value;
-    chrome.storage.local.get('snapshots', function(storage){
-      var snapshots = storage.snapshots;
-      snapshots.push(snapshot);
-      chrome.storage.local.set({'snapshots': snapshots});
-    });
-  });
-
-  // delete a snapshot
-  var deleteSnapshotButton = document.getElementById('delete-snapshot');
-  deleteSnapshotButton.addEventListener('click', function(){
-    var candidate = document.getElementById('delete-snapshot-form')['delete-candidate'].value;
-    chrome.storage.local.get('snapshots', function (storage){
-      var snapshots = storage.snapshots;
-      var index = snapshots.indexOf(candidate);
-      if(index > -1){
-        snapshots.splice(index, 1);
-      }
-      chrome.storage.local.set({'snapshots': snapshots});
-    });
-  });
-
   // display snapshots
   var snapshots = document.getElementById('snapshots');
   chrome.storage.local.get('snapshots', function (storage){
@@ -79,30 +54,5 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelector('input[name="snapshot"]:checked').focus();
       })
     }
-  });
-
-  // display candidates of snapshot to delete
-  var select = document.getElementById('delete-candidate');
-  chrome.storage.local.get('snapshots', function (storage){
-    if(storage.snapshots){
-      storage.snapshots.forEach(function(snapshotName){
-        var option = document.createElement('option');
-        option.value = snapshotName;
-        option.innerHTML = snapshotName;
-        select.appendChild(option);
-      });
-    }
-  });
-
-  // display the form to add a snapshot
-  document.getElementById('add-snapshot-link').addEventListener('click', function(){
-    document.getElementById('add-snapshot-form').style.display = 'block';
-    document.getElementById('delete-snapshot-form').style.display = 'none';
-  });
-
-  // display the form to delete a snapshot
-  document.getElementById('delete-snapshot-link').addEventListener('click', function(){
-    document.getElementById('delete-snapshot-form').style.display = 'block';
-    document.getElementById('add-snapshot-form').style.display = 'none';
   });
 });

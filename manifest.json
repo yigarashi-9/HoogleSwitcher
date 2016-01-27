@@ -11,12 +11,6 @@
   "permissions": [
     "storage"
   ],
-  "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": true
-  },
   "browser_action": {
     "default_icon": {
       "19": "images/icons/icon-19.png",
@@ -24,5 +18,11 @@
     },
     "default_title": "HoogleSwitcher",
     "default_popup": "popup.html"
-  }
+  },
+  "web_accessible_resources": [
+    "options.html",
+    "js/options.js",
+    "css/main.css"
+  ],
+  "options_page": "options.html"
 }
