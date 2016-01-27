@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "0.0.0.2",
+  "version": "0.0.0.3",
   "name": "HoogleSwitcher",
   "author": "Yuu Igarashi",
   "description": "Help haskellers search hackage and stackage",
