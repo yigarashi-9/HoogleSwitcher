@@ -16,6 +16,7 @@ rules:
     - smart
 env:
   browser: true
+  node: true
 globals:
   chrome: false
 extends: 'eslint:recommended'
