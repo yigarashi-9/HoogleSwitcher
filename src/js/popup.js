@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', function(){
         'hackage': {'name': 'Hackage', 'prim': true},
         'lts': {'name': 'LTS (latest)', 'prim': true},
         'nightly': {'name': 'Nightly (latest)', 'prim': true}
-      }});
+      }}, main);
+    }else{
+      main();
     }
-    main();
   });
 });
 
