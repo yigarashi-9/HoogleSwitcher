@@ -1,0 +1,2 @@
+install: npm install -g eslint
+script: eslint js/
