@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
           option.innerHTML = snapshots[snapId].name;
           select.appendChild(option);
         }
-      };
+      }
     }
   });
 });
