@@ -1,5 +1,4 @@
 install: npm install -g eslint
 script: eslint src/js/
 notifications:
-  - email: false
-  - slack: yu-i9:DBtZY8MkAMXU9SnKU80wiPpT
+  slack: yu-i9:DBtZY8MkAMXU9SnKU80wiPpT
