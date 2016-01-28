@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
         'lts': {'name': 'LTS (latest)', 'prim': true},
         'nightly': {'name': 'Nightly (latest)', 'prim': true}
       }});
-    };
+    }
     main();
   });
 });
@@ -21,7 +21,7 @@ function main(){
 
     var url;
 
-    if(snapshot == 'hackage'){
+    if(snapshot === 'hackage'){
       url = 'https://www.haskell.org/hoogle/?hoogle=';
     }else{
       url = 'https://www.stackage.org/' + snapshot + '/hoogle?q=';
@@ -46,7 +46,7 @@ function main(){
         radio.id = snapId;
         radio.value = snapId;
 
-        if(snapId == 'hackage'){
+        if(snapId === 'hackage'){
           radio.checked = true;
         }
         span.appendChild(radio);
@@ -57,7 +57,7 @@ function main(){
         span.appendChild(label);
 
         snapshots.appendChild(span);
-      };
-    };
+      }
+    }
   });
-};
+}
