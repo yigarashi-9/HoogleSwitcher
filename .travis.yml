@@ -2,4 +2,5 @@ language: node_js
 node_js:
   - "stable"
 notifications:
+  email: false
   slack: yu-i9:DBtZY8MkAMXU9SnKU80wiPpT
