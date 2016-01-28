@@ -1,41 +1,47 @@
-document.addEventListener('DOMContentLoaded', function(){
-  // add a new snapshot
-  var addSnapshotButton = document.getElementById('addSnapshot');
-  addSnapshotButton.addEventListener('click', function(){
-    var snapshot = document.getElementById('addSnapshotForm').snapshot.value;
-    chrome.storage.local.get('snapshots', function(storage){
-      var snapshots = storage.snapshots;
-      snapshots[snapshot] = {'name': snapshot, 'prim': false};
-      chrome.storage.local.set({'snapshots': snapshots});
-    });
-  });
+var lib = require('./lib');
 
-  // delete a snapshot
+document.addEventListener('DOMContentLoaded', function(){
+  // add a new snapshot input by user
+  var addSnapshotButton = document.getElementById('addSnapshot');
+  addSnapshotButton.addEventListener('click', addSnapshot);
+
+  // delete a snapshot selected in <select>
   var deleteSnapshotButton = document.getElementById('deleteSnapshot');
-  deleteSnapshotButton.addEventListener('click', function(){
-    var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
-    chrome.storage.local.get('snapshots', function (storage){
-      var snapshots = storage.snapshots;
-      if(candidate in snapshots){
-        delete snapshots[candidate];
-      }
-      chrome.storage.local.set({'snapshots': snapshots});
-    });
-  });
+  deleteSnapshotButton.addEventListener('click', deleteSnapshot);
 
   // display candidates of snapshot to delete
-  var select = document.getElementById('deleteCandidate');
-  chrome.storage.local.get('snapshots', function (storage){
-    if(storage.snapshots){
-      var snapshots = storage.snapshots;
-      for(var snapId in snapshots){
-        if(!snapshots[snapId].prim){
-          var option = document.createElement('option');
-          option.value = snapId;
-          option.innerHTML = snapshots[snapId].name;
-          select.appendChild(option);
-        }
-      }
-    }
-  });
+  lib.getSnapshots.then(createSelectList);
 });
+
+
+function addSnapshot(){
+  var snapshot = document.getElementById('addSnapshotForm').snapshot.value;
+  lib.getSnapshots.then(function(snapshots){
+    snapshots[snapshot] = {'name': snapshot, 'prim': false};
+    chrome.storage.local.set({'snapshots': snapshots});
+  });
+}
+
+
+function deleteSnapshot(){
+  var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
+  lib.getSnapshots.then(function (snapshots){
+    if(candidate in snapshots){
+      delete snapshots[candidate];
+    }
+    chrome.storage.local.set({'snapshots': snapshots});
+  });
+}
+
+
+function createSelectList(snapshots){
+  var select = document.getElementById('deleteCandidate');
+  for(var snapId in snapshots){
+    if(!snapshots[snapId].prim){
+      var option = document.createElement('option');
+      option.value = snapId;
+      option.innerHTML = snapshots[snapId].name;
+      select.appendChild(option);
+    }
+  }
+}
