@@ -1,0 +1,22 @@
+{
+  "name": "hoogleswitcher",
+  "version": "1.0.0",
+  "description": "Chrome extension helping haskellers search hackage and stackage.",
+  "scripts": {
+    "build": "browserify src/js/popup.js > apps/js/popup.js && browserify src/js/options.js > apps/js/options.js",
+    "test": "eslint src/js/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yu-i9/HoogleSwitcher.git"
+  },
+  "author": "Yuu Igarashi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yu-i9/HoogleSwitcher/issues"
+  },
+  "homepage": "https://github.com/yu-i9/HoogleSwitcher#readme",
+  "dependencies": {
+    "eslint": "^1.10.3"
+  }
+}

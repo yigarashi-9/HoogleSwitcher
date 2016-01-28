@@ -5,25 +5,25 @@
   "author": "Yuu Igarashi",
   "description": "Help haskellers search hackage and stackage",
   "icons": {
-    "16": "src/images/icons/icon-16.png",
-    "48": "src/images/icons/icon-48.png",
-    "128": "src/images/icons/icon-128.png"
+    "16": "apps/images/icons/icon-16.png",
+    "48": "apps/images/icons/icon-48.png",
+    "128": "apps/images/icons/icon-128.png"
   },
   "permissions": [
     "storage"
   ],
   "browser_action": {
     "default_icon": {
-      "19": "src/images/icons/icon-19.png",
-      "38": "src/images/icons/icon-38.png"
+      "19": "apps/images/icons/icon-19.png",
+      "38": "apps/images/icons/icon-38.png"
     },
     "default_title": "HoogleSwitcher",
-    "default_popup": "src/popup.html"
+    "default_popup": "apps/popup.html"
   },
   "web_accessible_resources": [
-    "src/options.html",
-    "src/js/options.js",
-    "src/css/main.css"
+    "apps/options.html",
+    "apps/js/options.js",
+    "apps/css/main.css"
   ],
-  "options_page": "src/options.html"
+  "options_page": "apps/options.html"
 }
