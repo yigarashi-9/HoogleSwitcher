@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Chrome extension helping haskellers search hackage and stackage.",
   "scripts": {
-    "build": "browserify src/js/popup.js > apps/js/popup.js && browserify src/js/options.js > apps/js/options.js",
-    "test": "eslint src/js/"
+    "build": "./scripts/build.sh",
+    "test": "eslint src/js/",
+    "pack": "./scripts/pack.sh"
   },
   "repository": {
     "type": "git",
