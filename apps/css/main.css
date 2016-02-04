@@ -104,3 +104,22 @@ span.snapshot {
     vertical-align: middle;
     cursor: pointer;
 }
+
+.message {
+    padding: 10px 30px;
+    margin-top: 20px;
+    font-size: 15px;
+    border-radius: 3px;
+}
+
+.message-success {
+    border: solid 1px #3EBA2B;
+    background: #D1F1CC;
+    color: #23AC0E;
+}
+
+.message-error {
+    border: solid 1px #D04255;
+    background: #F6D4D8;
+    color: #C7243A;
+}
