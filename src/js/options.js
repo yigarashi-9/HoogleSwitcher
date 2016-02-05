@@ -1,5 +1,5 @@
-var lib = require('./lib');
-var message = require('./message');
+var snapshot = require('./lib/snapshot');
+var message = require('./lib/message');
 
 document.addEventListener('DOMContentLoaded', function(){
   // add a new snapshot input by user
@@ -23,19 +23,19 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 
   // display candidates of snapshot to delete
-  lib.getSnapshots.then(createSelectList);
+  snapshot.get.then(createSelectList);
 });
 
 
 function addSnapshot(){
-  var snapshot = document.getElementById('addSnapshotForm').snapshot.value;
-  lib.getSnapshots.then(function(snapshots){
-    snapshots[snapshot] = {'name': snapshot, 'prim': false};
+  var snapName = document.getElementById('addSnapshotForm').snapshot.value;
+  snapshot.get.then(function(snapshots){
+    snapshots[snapName] = {'name': snapName, 'prim': false};
     chrome.storage.local.set({'snapshots': snapshots}, function(){
       if(chrome.runtime.lastError){
-        message.send.error('Fail to add ' + snapshot + ', Please retry.');
+        message.send.error('Fail to add ' + snapName + ', Please retry.');
       }else{
-        message.send.success(snapshot + ' has been added.');
+        message.send.success(snapName + ' has been added.');
       }
     });
   });
@@ -44,7 +44,7 @@ function addSnapshot(){
 
 function deleteSnapshot(){
   var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
-  lib.getSnapshots.then(function (snapshots){
+  snapshot.get.then(function (snapshots){
     if(candidate in snapshots){
       delete snapshots[candidate];
     }

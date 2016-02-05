@@ -1,4 +1,4 @@
-var lib = require('./lib');
+var snapshot = require('./lib/snapshot');
 
 document.addEventListener('DOMContentLoaded', function(){
   // open a new tab for the result of a query on the snapshot
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function(){
   searchButton.addEventListener('click', openSearchResult);
 
   // list snapshots
-  lib.getSnapshots.then(createRadioButtons);
+  snapshot.get.then(createRadioButtons);
 });
 
 
