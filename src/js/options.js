@@ -1,5 +1,5 @@
-var lib = require('./lib');
-var message = require('./message');
+var lib = require('./lib/snapshot');
+var message = require('./lib/message');
 
 document.addEventListener('DOMContentLoaded', function(){
   // add a new snapshot input by user

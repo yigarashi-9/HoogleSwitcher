@@ -1,4 +1,4 @@
-var lib = require('./lib');
+var lib = require('./lib/snapshot');
 
 document.addEventListener('DOMContentLoaded', function(){
   // open a new tab for the result of a query on the snapshot
