@@ -1,4 +1,4 @@
-module.exports.getSnapshots = new Promise(
+module.exports.get = new Promise(
   function(resolve, reject){
     chrome.storage.local.get('snapshots', function(storage){
       if(chrome.runtime.lastError){
