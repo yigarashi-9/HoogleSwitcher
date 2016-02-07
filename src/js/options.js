@@ -3,32 +3,20 @@ var message = require('./lib/message');
 
 document.addEventListener('DOMContentLoaded', function(){
   // add a new snapshot input by user
-  var addSnapshotButton = document.getElementById('addSnapshot');
-  addSnapshotButton.addEventListener('click', addSnapshot);
+  document.getElementById('addSnapshot').addEventListener('click', addSnapshot);
 
   // delete a snapshot selected in <select>
   var deleteSnapshotButton = document.getElementById('deleteSnapshot');
   deleteSnapshotButton.addEventListener('click', deleteSnapshot);
 
-  // display result message
-  message.get.then(function(msg){
-    var title = document.querySelector('.options h1');
-    var p = document.createElement('p');
-    p.textContent = msg.body;
-    p.classList.add('message', msg.label);
-
-    // add after h1 title
-    title.parentNode.insertBefore(p, title.nextSibling);
-    message.clear();
-  });
-
   // display candidates of snapshot to delete
-  snapshot.get.then(createSelectList);
+  snapshot.get.then(showDeleteCandidates);
 });
 
 
 function addSnapshot(){
-  var snapName = document.getElementById('addSnapshotForm').snapshot.value;
+  var form = document.forms['addSnapshotForm'];
+  var snapName = form.snapshot.value;
   snapshot.get.then(function(snapshots){
     snapshots[snapName] = {'name': snapName, 'prim': false};
     chrome.storage.local.set({'snapshots': snapshots}, function(){
@@ -36,6 +24,8 @@ function addSnapshot(){
         message.send.error('Fail to add ' + snapName + ', Please retry.');
       }else{
         message.send.success(snapName + ' has been added.');
+        form.reset();
+        showDeleteCandidates(snapshots);
       }
     });
   });
@@ -59,8 +49,14 @@ function deleteSnapshot(){
 }
 
 
-function createSelectList(snapshots){
+function showDeleteCandidates(snapshots){
   var select = document.getElementById('deleteCandidate');
+
+  // delete all candidates
+  while (select.firstChild) {
+    select.removeChild(select.firstChild);
+  }
+
   for(var snapId in snapshots){
     if(!snapshots[snapId].prim){
       var option = document.createElement('option');
