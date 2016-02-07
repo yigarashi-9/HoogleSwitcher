@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('addSnapshot').addEventListener('click', addSnapshot);
 
   // delete a snapshot selected in <select>
-  var deleteSnapshotButton = document.getElementById('deleteSnapshot');
-  deleteSnapshotButton.addEventListener('click', deleteSnapshot);
+  document.getElementById('deleteSnapshot').addEventListener('click', deleteSnapshot);
 
   // display candidates of snapshot to delete
   snapshot.get.then(showDeleteCandidates);
@@ -33,7 +32,7 @@ function addSnapshot(){
 
 
 function deleteSnapshot(){
-  var candidate = document.getElementById('deleteSnapshotForm').deleteCandidate.value;
+  var candidate = document.forms['deleteSnapshotForm'].deleteCandidate.value;
   snapshot.get.then(function (snapshots){
     if(candidate in snapshots){
       delete snapshots[candidate];
@@ -42,6 +41,7 @@ function deleteSnapshot(){
       if(chrome.runtime.lastError){
         message.send.error('Fail to delete ' + candidate + ', Please retry.');
       }else{
+        showDeleteCandidates(snapshots);
         message.send.success(candidate + ' has been deleted.');
       }
     });
