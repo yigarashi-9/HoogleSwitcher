@@ -10,7 +10,8 @@
     "128": "apps/images/icons/icon-128.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "https://www.stackage.org/*"
   ],
   "background": {
     "scripts": ["apps/js/background.js"],

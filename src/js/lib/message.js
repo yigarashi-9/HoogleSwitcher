@@ -8,5 +8,6 @@ module.exports.send = (function(){
   }
 
   return {'success': sendMessage.bind(null, 'message-success'),
+          'warning': sendMessage.bind(null, 'message-warning'),
           'error': sendMessage.bind(null, 'message-error')};
 }());
