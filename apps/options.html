@@ -9,12 +9,13 @@
   <body>
     <div class="options">
       <h1>Hoogle Switcher</h1>
+      <p id="message"></p>
       <div class="section">
         <h2>Add snapshot</h2>
         <form id="addSnapshotForm" method="post">
           <p class="help-text">Enter the name of stackage snapshot in lower case.</p>
           <input type="text" name="snapshot" placeholder="e.g. lts-4.2">
-          <button id="addSnapshot" class="btn btn-default">Add</button>
+          <button type="button" id="addSnapshot" class="btn btn-default">Add</button>
         </form>
       </div>
       <div class="section">
@@ -22,7 +23,7 @@
         <form id="deleteSnapshotForm" method="post">
           <select id="deleteCandidate" name="deleteCandidate">
           </select>
-          <button id="deleteSnapshot" class="btn btn-default">Delete</button>
+          <button type="button" id="deleteSnapshot" class="btn btn-default">Delete</button>
         </form>
       </div>
     </div>
