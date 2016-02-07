@@ -16,17 +16,47 @@ document.addEventListener('DOMContentLoaded', function(){
 function addSnapshot(){
   var form = document.forms['addSnapshotForm'];
   var snapName = form.snapshot.value;
-  snapshot.get.then(function(snapshots){
-    snapshots[snapName] = {'name': snapName, 'prim': false};
-    chrome.storage.local.set({'snapshots': snapshots}, function(){
-      if(chrome.runtime.lastError){
-        message.send.error('Fail to add ' + snapName + ', Please retry.');
-      }else{
-        message.send.success(snapName + ' has been added.');
-        form.reset();
-        showDeleteCandidates(snapshots);
-      }
+  checkSnapshotName(snapName, function(){
+    snapshot.get.then(function(snapshots){
+      snapshots[snapName] = {'name': snapName, 'prim': false};
+      chrome.storage.local.set({'snapshots': snapshots}, function(){
+        if(chrome.runtime.lastError){
+          message.send.error('Fail to add ' + snapName + ', Please retry.');
+        }else{
+          message.send.success(snapName + ' has been added.');
+          form.reset();
+          showDeleteCandidates(snapshots);
+        }
+      });
     });
+  });
+}
+
+
+function checkSnapshotName(snapName, callback){
+  if(snapName === ''){
+    message.send.error('Empty input is not allowed.');
+    return;
+  }
+
+  snapshot.get.then(function(snapshots){
+    if(snapName in snapshots){
+      message.send.warning(snapName + ' already exists.');
+      return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://www.stackage.org/' + snapName, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if(xhr.status === 404){
+          message.send.error('Invalid snapshot name: ' + snapName + ', see its url.');
+        }else if(xhr.status === 200){
+          callback();
+        }
+      }
+    };
+    xhr.send();
   });
 }
 

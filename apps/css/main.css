@@ -118,6 +118,12 @@ span.snapshot {
     color: #23AC0E;
 }
 
+.message-warning {
+    border: solid 1px #F0BA32;
+    background: #FCF1D3;
+    color: #EDAD0B;
+}
+
 .message-error {
     border: solid 1px #D04255;
     background: #F6D4D8;
