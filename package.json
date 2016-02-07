@@ -2,11 +2,6 @@
   "name": "hoogleswitcher",
   "version": "1.0.0",
   "description": "Chrome extension helping haskellers search hackage and stackage.",
-  "scripts": {
-    "build": "./scripts/build.sh",
-    "test": "eslint src/js/",
-    "pack": "./scripts/pack.sh"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yu-i9/HoogleSwitcher.git"
@@ -18,6 +13,12 @@
   },
   "homepage": "https://github.com/yu-i9/HoogleSwitcher#readme",
   "dependencies": {
-    "eslint": "^1.10.3"
+    "browserify": "^13.0.0",
+    "eslint": "^2.4.0",
+    "event-stream": "^3.3.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-zip": "^3.2.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
