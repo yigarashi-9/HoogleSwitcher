@@ -13,14 +13,13 @@
   },
   "homepage": "https://github.com/yu-i9/HoogleSwitcher#readme",
   "dependencies": {
-    "browserify": "^13.0.0",
-    "eslint": "^2.4.0",
-    "event-stream": "^3.3.2",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-watchify": "^0.5.0",
+    "gulp-tslint": "^4.3.3",
+    "gulp-webpack": "^1.5.0",
     "gulp-zip": "^3.2.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "ts-loader": "^0.8.1",
+    "tslint": "^3.6.0",
+    "typescript": "^1.8.7",
+    "webpack": "^1.12.14"
   }
 }

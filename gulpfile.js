@@ -1,35 +1,32 @@
-var browserify = require('browserify');
-var es = require('event-stream');
-var eslint = require('gulp-eslint');
 var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var watchify = require('gulp-watchify');
+var tslint = require('gulp-tslint');
 var zip = require('gulp-zip');
+var webpack = require('gulp-webpack');
+var webpackConfig = require('./webpack.config.js');
 
 var path = {
-  'src': './src/js/*.js',
+  'src': './src/ts/*.ts',
+  'lintSrc': './src/ts/**/*.ts',
   'dest': './apps/js/',
   'appSrc': ['./apps/**/*', 'manifest.json'],
   'appZip': 'apps.zip',
   'appDest': './'
 }
 
-var watching = false;
-gulp.task('enable-watch', function(){ watching = true; });
+gulp.task('enable-watch', function(){ webpackConfig.watch = true; });
 
-gulp.task('browserify', watchify(function(watchify){
+gulp.task('webpack', function(){
   return gulp.src(path.src)
-    .pipe(watchify({watch: watching}))
+    .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(path.dest));
-}));
+});
 
-gulp.task('watchify', ['enable-watch', 'browserify']);
+gulp.task('watch', ['enable-watch', 'webpack']);
 
 gulp.task('test', function(){
-  return gulp.src(path.src)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+  return gulp.src(path.lintSrc)
+    .pipe(tslint({configuration: './tslint.json'}))
+    .pipe(tslint.report('prose'));
 });
 
 gulp.task('zip', function(){
@@ -38,4 +35,4 @@ gulp.task('zip', function(){
     .pipe(gulp.dest(path.appDest))
 });
 
-gulp.task('pack', ['browserify', 'zip']);
+gulp.task('pack', ['webpack', 'zip']);
