@@ -18,7 +18,9 @@
     "event-stream": "^3.3.2",
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
+    "gulp-watchify": "^0.5.0",
     "gulp-zip": "^3.2.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   }
 }
