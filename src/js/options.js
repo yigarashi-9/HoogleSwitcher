@@ -3,18 +3,19 @@ var message = require('./lib/message');
 
 document.addEventListener('DOMContentLoaded', function(){
   // add a new snapshot input by user
-  document.getElementById('addSnapshot').addEventListener('click', addSnapshot);
+  document.forms['addSnapshotForm'].addEventListener('submit', addSnapshot);
 
   // delete a snapshot selected in <select>
-  document.getElementById('deleteSnapshot').addEventListener('click', deleteSnapshot);
+  document.forms['deleteSnapshotForm'].addEventListener('submit', deleteSnapshot);
 
   // display candidates of snapshot to delete
   snapshot.get.then(showDeleteCandidates);
 });
 
 
-function addSnapshot(){
-  var form = document.forms['addSnapshotForm'];
+function addSnapshot(event){
+  event.preventDefault();
+  var form = this;
   var snapName = form.snapshot.value;
   checkSnapshotName(snapName, function(){
     snapshot.get.then(function(snapshots){
@@ -30,6 +31,7 @@ function addSnapshot(){
       });
     });
   });
+  return false;
 }
 
 
@@ -61,8 +63,9 @@ function checkSnapshotName(snapName, callback){
 }
 
 
-function deleteSnapshot(){
-  var candidate = document.forms['deleteSnapshotForm'].deleteCandidate.value;
+function deleteSnapshot(event){
+  event.preventDefault();
+  var candidate = this.deleteCandidate.value;
   snapshot.get.then(function (snapshots){
     if(candidate in snapshots){
       delete snapshots[candidate];
@@ -76,6 +79,7 @@ function deleteSnapshot(){
       }
     });
   });
+  return false;
 }
 
 
