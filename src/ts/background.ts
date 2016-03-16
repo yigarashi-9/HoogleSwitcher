@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.local.get("snapshots", function(storage) {
-    if (!storage.snapshots) {
+    if (!storage["snapshots"]) {
       // initialize local storage
       chrome.storage.local.set({"snapshots": {
         "hackage": {"name": "Hackage", "prim": true},

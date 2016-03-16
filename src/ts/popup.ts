@@ -1,4 +1,4 @@
-let snapshot = require("./lib/snapshot");
+import Snapshot = require("./Lib/Snapshot");
 
 document.addEventListener("DOMContentLoaded", function() {
   // open a new tab for the result of a query on the snapshot
@@ -6,19 +6,19 @@ document.addEventListener("DOMContentLoaded", function() {
   searchButton.addEventListener("click", openSearchResult);
 
   // list snapshots
-  snapshot.get.then(createRadioButtons);
+  Snapshot.get.then(createRadioButtons);
 });
 
 
 function openSearchResult() {
-  let query = document.getElementById("searchForm").query.value;
-  let snapshot = document.querySelector("input[name="snapshot"]:checked").value;
+  let query = document.getElementById("searchForm")["query"].value;
+  let snapshotName = (<HTMLInputElement>document.querySelector("input[name='snapshot']:checked")).value;
   let url;
 
-  if (snapshot === "hackage") {
+  if (snapshotName === "hackage") {
     url = "https://www.haskell.org/hoogle/?hoogle=";
   } else {
-    url = "https://www.stackage.org/" + snapshot + "/hoogle?q=";
+    url = "https://www.stackage.org/" + snapshotName + "/hoogle?q=";
   }
 
   url += query;

@@ -23,11 +23,13 @@ gulp.task('webpack', function(){
 
 gulp.task('watch', ['enable-watch', 'webpack']);
 
-gulp.task('test', function(){
+gulp.task('tslint', function(){
   return gulp.src(path.lintSrc)
     .pipe(tslint({configuration: './tslint.json'}))
     .pipe(tslint.report('prose'));
 });
+
+gulp.task('test', ['webpack', 'tslint']);
 
 gulp.task('zip', function(){
   return gulp.src(path.appSrc)

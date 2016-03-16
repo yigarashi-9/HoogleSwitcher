@@ -14,5 +14,6 @@ module.exports = {
   },
   module: {
     loaders: [{test: /\.ts(x?)$/, loader: 'ts-loader'}]
-  }
+  },
+  plugins: [require('webpack-fail-plugin')]
 };
