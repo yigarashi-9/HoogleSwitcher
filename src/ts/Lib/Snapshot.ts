@@ -6,7 +6,7 @@ export let get = new Promise(
       } else if (storage["snapshots"]) {
         resolve(storage["snapshots"]);
       } else {
-        alert("Snapshots does not exist...\nPlease reinstall the extension,sorry.");
+        alert("Snapshots does not exist...\nPlease reinstall the extension, sorry.");
       }
     });
   });
