@@ -43,14 +43,13 @@ export class SnapshotList {
   }
 
   set(): Promise<SnapshotList> {
-    let _this = this;
     return new Promise(
       (resolve: SnapshotListCallback, reject: ErrorCallback) => {
-        chrome.storage.local.set({"snaplist": _this.list}, function() {
+        chrome.storage.local.set({"snaplist": this.list}, () => {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError.message);
           } else {
-            resolve(_this);
+            resolve(this);
           }
         });
       });
