@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": false
+  },
+  "files": [
+    "./src/ts/background.ts",
+    "./src/ts/popup.ts",
+    "./src/ts/options.ts",
+    "./typings/main.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
