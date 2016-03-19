@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var tslint = require('gulp-tslint');
 var zip = require('gulp-zip');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 var webpackConfig = require('./webpack.config.js');
 
 var path = {
