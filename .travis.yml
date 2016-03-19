@@ -4,4 +4,5 @@ node_js:
 notifications:
   email: false
   slack: yu-i9:DBtZY8MkAMXU9SnKU80wiPpT
+before_script: typings install
 script: gulp test
