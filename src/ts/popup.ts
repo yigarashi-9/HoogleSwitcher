@@ -1,4 +1,4 @@
-import Snapshot = require("./Lib/Snapshot");
+import snapshot = require("./Models/Snapshot");
 
 document.addEventListener("DOMContentLoaded", function() {
   // open a new tab for the result of a query on the snapshot
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   searchButton.addEventListener("click", openSearchResult);
 
   // list snapshots
-  Snapshot.get.then(createRadioButtons);
+  snapshot.SnapshotList.loadAll().then(createRadioButtons);
 });
 
 
@@ -26,28 +26,28 @@ function openSearchResult() {
 }
 
 
-function createRadioButtons(snapshots) {
-  let snapshotSpanList = document.getElementById("snapshots");
-  for (let snapId in snapshots) {
+function createRadioButtons(snaplist) {
+  let snapshotSpanList = document.getElementById("snaplist");
+  snaplist.map((snapshot) => {
     let span = document.createElement("span");
     span.classList.add("snapshot");
 
     let radio = document.createElement("input");
     radio.type = "radio";
     radio.name = "snapshot";
-    radio.id = snapId;
-    radio.value = snapId;
+    radio.id = snapshot.id;
+    radio.value = snapshot.id;
 
-    if (snapId === "hackage") {
+    if (snapshot.id === "hackage") {
       radio.checked = true;
     }
     span.appendChild(radio);
 
     let label = document.createElement("label");
-    label.htmlFor = snapId;
-    label.innerHTML = snapshots[snapId].name;
+    label.htmlFor = snapshot.id;
+    label.innerHTML = snapshot.name;
     span.appendChild(label);
 
     snapshotSpanList.appendChild(span);
-  }
+  });
 }

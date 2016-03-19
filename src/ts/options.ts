@@ -1,5 +1,5 @@
-import message = require("./Lib/Message");
-import snapshot = require("./Lib/Snapshot");
+import message = require("./Utils/Message");
+import snapshot = require("./Models/Snapshot");
 
 document.addEventListener("DOMContentLoaded", function() {
   // add a new snapshot input by user
@@ -9,25 +9,24 @@ document.addEventListener("DOMContentLoaded", function() {
   document.forms["deleteSnapshotForm"].addEventListener("submit", deleteSnapshot);
 
   // display candidates of snapshot to delete
-  snapshot.get.then(showDeleteCandidates);
+  snapshot.SnapshotList.loadAll().then(renderDeleteCandidates);
 });
 
+let messenger = new message.Message("message");
 
 function addSnapshot(event) {
   event.preventDefault();
   let form = this;
   let snapName = form.snapshot.value;
   checkSnapshotName(snapName, function() {
-    snapshot.get.then(function(snapshots) {
-      snapshots[snapName] = {"name": snapName, "prim": false};
-      chrome.storage.local.set({"snapshots": snapshots}, function() {
-        if (chrome.runtime.lastError) {
-          message.send.error("Fail to add " + snapName + ", Please retry.");
-        } else {
-          message.send.success(snapName + " has been added.");
-          form.reset();
-          showDeleteCandidates(snapshots);
-        }
+    snapshot.SnapshotList.loadAll().then(function(snaplist) {
+      snaplist.push(new snapshot.Snapshot(snapName, snapName, false));
+      snaplist.set().then(function(snaplist) {
+        messenger.success(snapName + " has been added.");
+        form.reset();
+        renderDeleteCandidates(snaplist);
+      }, function() {
+        messenger.error("Fail to add " + snapName + ", Please retry.");
       });
     });
   });
@@ -35,15 +34,15 @@ function addSnapshot(event) {
 }
 
 
-function checkSnapshotName(snapName, callback) {
+function checkSnapshotName(snapName: string, callback) {
   if (snapName === "") {
-    message.send.error("Empty input is not allowed.");
+    messenger.error("Empty input is not allowed.");
     return;
   }
 
-  snapshot.get.then(function(snapshots) {
-    if (snapName in snapshots) {
-      message.send.warning(snapName + " already exists.");
+  snapshot.SnapshotList.loadAll().then(function(snaplist) {
+    if (snaplist.findIndex(snapName) !== -1) {
+      messenger.warning(snapName + " already exists.");
       return;
     }
 
@@ -52,7 +51,7 @@ function checkSnapshotName(snapName, callback) {
     xhr.onreadystatechange = function() {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 404) {
-          message.send.error("Invalid snapshot name: " + snapName + ", see its url.");
+          messenger.error("Invalid snapshot name: " + snapName + ", see its url.");
         } else if (xhr.status === 200) {
           callback();
         }
@@ -65,38 +64,33 @@ function checkSnapshotName(snapName, callback) {
 
 function deleteSnapshot(event) {
   event.preventDefault();
-  let candidate = this.deleteCandidate.value;
-  snapshot.get.then(function (snapshots) {
-    if (candidate in snapshots) {
-      delete snapshots[candidate];
-    }
-    chrome.storage.local.set({"snapshots": snapshots}, function() {
-      if (chrome.runtime.lastError) {
-        message.send.error("Fail to delete " + candidate + ", Please retry.");
-      } else {
-        showDeleteCandidates(snapshots);
-        message.send.success(candidate + " has been deleted.");
-      }
+  let id = this.deleteCandidate.value;
+  snapshot.SnapshotList.loadAll().then(function (snaplist) {
+    snaplist.deleteSnapshot(id);
+    snaplist.set().then((snaplist) => {
+      renderDeleteCandidates(snaplist);
+      messenger.success(id + " has been deleted.");
+    }, () => {
+      messenger.error("Fail to delete " + id + ". Please retry.");
     });
   });
   return false;
 }
 
 
-function showDeleteCandidates(snapshots) {
+function renderDeleteCandidates(snaplist: snapshot.SnapshotList) {
   let select = document.getElementById("deleteCandidate");
-
   // delete all candidates
   while (select.firstChild) {
     select.removeChild(select.firstChild);
   }
 
-  for (let snapId in snapshots) {
-    if (!snapshots[snapId].prim) {
+  snaplist.map((snapshot) => {
+    if (!snapshot.isPrim) {
       let option = document.createElement("option");
-      option.value = snapId;
-      option.innerHTML = snapshots[snapId].name;
+      option.value = snapshot.id;
+      option.innerHTML = snapshot.name;
       select.appendChild(option);
     }
-  }
+  });
 }
